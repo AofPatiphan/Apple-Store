@@ -1,5 +1,6 @@
 import React, { useEffect } from 'react';
 import { Navigate, Route, Routes } from 'react-router-dom';
+import MainLayout from '../components/layouts/mainlayout/MainLayout';
 import Login from '../components/auths/login/Login';
 import Register from '../components/auths/register/Register';
 import Home from '../pages/home/Home';
@@ -28,13 +29,15 @@ function RouteConfig() {
             {role === 'user' ? (
                 <>
                     <Routes>
-                        {routes[role].map((item) => (
-                            <Route
-                                path={item.path}
-                                element={item.element}
-                                key={item.path}
-                            />
-                        ))}
+                        <Route path="/" element={<MainLayout />}>
+                            {routes[role].map((item) => (
+                                <Route
+                                    path={item.path}
+                                    element={item.element}
+                                    key={item.path}
+                                />
+                            ))}
+                        </Route>
                     </Routes>
                     {/* <Footer /> */}
                 </>
