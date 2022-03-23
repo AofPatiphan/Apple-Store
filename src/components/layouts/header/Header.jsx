@@ -4,7 +4,7 @@ import { AuthContext } from '../../../contexts/AuthContext';
 import './header.css';
 
 function Header() {
-    const { handleSubmitLogout } = useContext(AuthContext);
+    const { handleSubmitLogout, role } = useContext(AuthContext);
     return (
         <div>
             <nav className="navbar navbar-expand-lg navbar-light bg-light">
@@ -42,24 +42,61 @@ function Header() {
                                     Home
                                 </Link>
                             </li>
-                            <li className="nav-item">
-                                <Link className="nav-link" to={'/login'}>
-                                    Login
-                                </Link>
-                            </li>
-                            <li className="nav-item">
-                                <Link className="nav-link" to={'/register'}>
-                                    Register
-                                </Link>
-                            </li>
+                            {role === 'guest' ? (
+                                <>
+                                    <li className="nav-item">
+                                        <Link
+                                            className="nav-link"
+                                            to={'/login'}
+                                        >
+                                            Login
+                                        </Link>
+                                    </li>
+                                    <li className="nav-item">
+                                        <Link
+                                            className="nav-link"
+                                            to={'/register'}
+                                        >
+                                            Register
+                                        </Link>
+                                    </li>
+                                </>
+                            ) : (
+                                <form className="d-flex ms-4">
+                                    <input
+                                        className="form-control me-2"
+                                        type="search"
+                                        placeholder="Search"
+                                        aria-label="Search"
+                                    />
+                                    <button
+                                        className="btn btn-outline-success"
+                                        type="submit"
+                                    >
+                                        Search
+                                    </button>
+                                </form>
+                            )}
                         </ul>
-                        <button
-                            type="button"
-                            className="btn"
-                            onClick={handleSubmitLogout}
-                        >
-                            Logout
-                        </button>
+                        {role === 'guest' ? (
+                            <></>
+                        ) : (
+                            <>
+                                <button type="button" className="btn">
+                                    Shop
+                                </button>
+                                <button type="button" className="btn">
+                                    Cart
+                                </button>
+                                <button
+                                    type="button"
+                                    className="btn"
+                                    onClick={handleSubmitLogout}
+                                >
+                                    Logout
+                                </button>
+                            </>
+                        )}
                     </div>
                 </div>
             </nav>

@@ -1,0 +1,17 @@
+.homeBody {
+    padding: 10px 30px;
+}
+.homeBanner {
+    /* width: 100%; */
+    height: 400px;
+    background-color: lightgray;
+    text-align: center;
+    font-size: 5rem;
+    font-weight: 600;
+    color: white;
+}
+.productCardContainer {
+    display: flex;
+    justify-content: center;
+    padding: 20px 0;
+}
