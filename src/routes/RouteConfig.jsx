@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import { Navigate, Route, Routes } from 'react-router-dom';
 import MainLayout from '../components/layouts/mainlayout/MainLayout';
 import Login from '../components/auths/login/Login';
@@ -23,7 +23,7 @@ const routes = {
 };
 
 function RouteConfig() {
-    const role = 'user';
+    const role = 'guest';
     return (
         <>
             {role === 'user' ? (
@@ -41,15 +41,31 @@ function RouteConfig() {
                     </Routes>
                     {/* <Footer /> */}
                 </>
+            ) : role === 'admin' ? (
+                <>
+                    <Routes>
+                        <Route path="/" element={<MainLayout />}>
+                            {routes[role].map((item) => (
+                                <Route
+                                    path={item.path}
+                                    element={item.element}
+                                    key={item.path}
+                                />
+                            ))}
+                        </Route>
+                    </Routes>
+                </>
             ) : (
                 <Routes>
-                    {routes[role].map((item) => (
-                        <Route
-                            path={item.path}
-                            element={item.element}
-                            key={item.path}
-                        />
-                    ))}
+                    <Route path="/" element={<MainLayout />}>
+                        {routes[role].map((item) => (
+                            <Route
+                                path={item.path}
+                                element={item.element}
+                                key={item.path}
+                            />
+                        ))}
+                    </Route>
                 </Routes>
             )}
         </>
