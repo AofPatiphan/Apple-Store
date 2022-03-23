@@ -7,10 +7,13 @@ import './index.css';
 import App from './App';
 import { BrowserRouter } from 'react-router-dom';
 import reportWebVitals from './reportWebVitals';
+import AuthContextProvider from './contexts/AuthContext';
 
 ReactDOM.render(
     <BrowserRouter>
-        <App />
+        <AuthContextProvider>
+            <App />
+        </AuthContextProvider>
     </BrowserRouter>,
     document.getElementById('root')
 );

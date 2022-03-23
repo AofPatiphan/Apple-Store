@@ -1,9 +1,10 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { Navigate, Route, Routes } from 'react-router-dom';
 import MainLayout from '../components/layouts/mainlayout/MainLayout';
 import Login from '../components/auths/login/Login';
 import Register from '../components/auths/register/Register';
 import Home from '../pages/home/Home';
+import { AuthContext } from '../contexts/AuthContext';
 
 const routes = {
     guest: [
@@ -23,7 +24,7 @@ const routes = {
 };
 
 function RouteConfig() {
-    const role = 'guest';
+    const { role, user } = useContext(AuthContext);
     return (
         <>
             {role === 'user' ? (

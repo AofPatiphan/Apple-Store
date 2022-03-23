@@ -1,8 +1,10 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { Link } from 'react-router-dom';
+import { AuthContext } from '../../../contexts/AuthContext';
 import './header.css';
 
 function Header() {
+    const { handleSubmitLogout } = useContext(AuthContext);
     return (
         <div>
             <nav className="navbar navbar-expand-lg navbar-light bg-light">
@@ -51,9 +53,13 @@ function Header() {
                                 </Link>
                             </li>
                         </ul>
-                        <span className="navbar-text">
-                            Navbar text with an inline element
-                        </span>
+                        <button
+                            type="button"
+                            className="btn"
+                            onClick={handleSubmitLogout}
+                        >
+                            Logout
+                        </button>
                     </div>
                 </div>
             </nav>

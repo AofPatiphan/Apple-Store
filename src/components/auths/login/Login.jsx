@@ -1,23 +1,26 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import './login.css';
 import { Link } from 'react-router-dom';
+import { AuthContext } from '../../../contexts/AuthContext';
 
 function Login() {
+    const { facebookLogin } = useContext(AuthContext);
+
     return (
-        <div className="">
+        <>
             <div className="container" style={{ paddingTop: '50px' }}>
                 <div className="row">
-                    <div className="col"></div>
-                    <div className="col">
+                    <div className="col-lg-4 col-md-2 col-sm-2 col-xs-0"></div>
+                    <div className="col-lg-4 col-md-8 col-sm-8 col-xs-12">
                         <h1>Login</h1>
                     </div>
-                    <div className="col"></div>
+                    <div className="col-lg-4 col-md-2 col-sm-2 col-xs-0"></div>
                 </div>
             </div>
             <div className="container">
                 <div className="row">
-                    <div className="col"></div>
-                    <div className="col">
+                    <div className="col-lg-4 col-md-2 col-sm-2 col-xs-0"></div>
+                    <div className="col-lg-4 col-md-8 col-sm-8 col-xs-12">
                         <div className="">
                             <form>
                                 <div className="mb-3">
@@ -61,13 +64,20 @@ function Login() {
                                 >
                                     Login
                                 </button>
+                                <button
+                                    type="submit"
+                                    className="btn facebookLoginButton loginButton"
+                                    onClick={facebookLogin}
+                                >
+                                    <strong>Facebook</strong>
+                                </button>
                             </form>
                         </div>
                     </div>
-                    <div className="col"></div>
+                    <div className="col-lg-4 col-md-2 col-sm-2 col-xs-0"></div>
                 </div>
             </div>
-        </div>
+        </>
     );
 }
 
