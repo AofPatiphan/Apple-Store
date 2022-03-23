@@ -25,6 +25,15 @@ const routes = {
 
 function RouteConfig() {
     const { role, user } = useContext(AuthContext);
+
+    if ((role === 'user' || role === 'admin') && !user) {
+        return (
+            <div className="spinner-border text-primary" role="status">
+                <span className="visually-hidden">Loading...</span>
+            </div>
+        );
+    }
+
     return (
         <>
             {role === 'user' ? (
@@ -46,7 +55,7 @@ function RouteConfig() {
                 <>
                     <Routes>
                         <Route path="/" element={<MainLayout />}>
-                            {routes[role].map((item) => (
+                            {routes[role]?.map((item) => (
                                 <Route
                                     path={item.path}
                                     element={item.element}
@@ -59,7 +68,7 @@ function RouteConfig() {
             ) : (
                 <Routes>
                     <Route path="/" element={<MainLayout />}>
-                        {routes[role].map((item) => (
+                        {routes[role]?.map((item) => (
                             <Route
                                 path={item.path}
                                 element={item.element}

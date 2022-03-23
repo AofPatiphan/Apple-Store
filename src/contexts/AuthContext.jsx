@@ -17,6 +17,8 @@ function AuthContextProvider(props) {
     const [role, setRole] = useState(localStorageService.getRole());
     const navigate = useNavigate();
 
+    console.log(role);
+
     useEffect(() => {
         const token = localStorageService.getToken('token');
         if (token) {
