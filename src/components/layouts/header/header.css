@@ -1,11 +1,12 @@
 .navDefault {
-    background-color: rgba(0, 0, 0, 0.7);
+    background-color: rgba(0, 0, 0, 0.8);
     color: white;
     font-size: 0.8rem;
 }
 .logoPic {
-    width: 40px;
-    height: 40px;
+    width: 20px;
+    height: 20px;
+    vertical-align: middle;
 }
 .navButton {
     color: white;
