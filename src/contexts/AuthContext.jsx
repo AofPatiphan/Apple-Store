@@ -38,8 +38,9 @@ function AuthContextProvider(props) {
         }
     };
 
-    const handleSubmitLogin = async () => {
+    const handleSubmitLogin = async (e) => {
         try {
+            e.preventDefault();
             const res = await axios.post('/auth/login', { email, password });
             login(res.data.token);
         } catch (err) {
@@ -60,7 +61,7 @@ function AuthContextProvider(props) {
     const handleSubmitRegister = async (e) => {
         e.preventDefault();
         try {
-            await axios.post('/auth/register', {
+            const res = await axios.post('/auth/register', {
                 firstName,
                 lastName,
                 email,
@@ -68,11 +69,14 @@ function AuthContextProvider(props) {
                 confirmPassword,
             });
 
+            console.log(res.data.myUser);
+
             navigate('/login');
             setFirstName('');
             setLastName('');
             setEmail('');
             setPassword('');
+            setConfirmPassword('');
         } catch (err) {
             console.log(err);
         }

@@ -1,8 +1,21 @@
-import React from 'react';
+import React, { useContext } from 'react';
+import { AuthContext } from '../../../contexts/AuthContext';
 import './register.css';
-import { Link } from 'react-router-dom';
 
 function Register() {
+    const {
+        firstName,
+        setFirstName,
+        lastName,
+        setLastName,
+        confirmPassword,
+        setConfirmPassword,
+        email,
+        setEmail,
+        password,
+        setPassword,
+        handleSubmitRegister,
+    } = useContext(AuthContext);
     return (
         <>
             <div className="container" style={{ paddingTop: '50px' }}>
@@ -19,7 +32,33 @@ function Register() {
                     <div className="col"></div>
                     <div className="col">
                         <div className="">
-                            <form>
+                            <form onSubmit={handleSubmitRegister}>
+                                <div className="mb-3">
+                                    <label className="form-label">
+                                        First name
+                                    </label>
+                                    <input
+                                        type="text"
+                                        className="form-control"
+                                        value={firstName}
+                                        onChange={(e) =>
+                                            setFirstName(e.target.value)
+                                        }
+                                    />
+                                </div>
+                                <div className="mb-3">
+                                    <label className="form-label">
+                                        Last name
+                                    </label>
+                                    <input
+                                        type="text"
+                                        className="form-control"
+                                        value={lastName}
+                                        onChange={(e) =>
+                                            setLastName(e.target.value)
+                                        }
+                                    />
+                                </div>
                                 <div className="mb-3">
                                     <label className="form-label">
                                         Email address
@@ -27,6 +66,10 @@ function Register() {
                                     <input
                                         type="email"
                                         className="form-control"
+                                        value={email}
+                                        onChange={(e) =>
+                                            setEmail(e.target.value)
+                                        }
                                     />
                                 </div>
                                 <div className="mb-3">
@@ -36,30 +79,30 @@ function Register() {
                                     <input
                                         type="password"
                                         className="form-control"
+                                        value={password}
+                                        onChange={(e) =>
+                                            setPassword(e.target.value)
+                                        }
                                     />
                                 </div>
-                                <div className="mb-3 form-check d-flex justify-content-between">
-                                    <div>
-                                        <input
-                                            type="checkbox"
-                                            className="form-check-input"
-                                        />
-                                        <label className="form-check-label">
-                                            Remember me
-                                        </label>
-                                    </div>
-                                    <Link
-                                        to={'/register'}
-                                        style={{ textDecoration: 'none' }}
-                                    >
-                                        Create account
-                                    </Link>
+                                <div className="mb-3">
+                                    <label className="form-label">
+                                        Confirm password
+                                    </label>
+                                    <input
+                                        type="password"
+                                        className="form-control"
+                                        value={confirmPassword}
+                                        onChange={(e) =>
+                                            setConfirmPassword(e.target.value)
+                                        }
+                                    />
                                 </div>
                                 <button
                                     type="submit"
-                                    className="btn btn-secondary registerButton"
+                                    className="btn btn-secondary registerButton mt-3"
                                 >
-                                    Login
+                                    Register
                                 </button>
                             </form>
                         </div>

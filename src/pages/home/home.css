@@ -1,5 +1,5 @@
 .homeBody {
-    padding: 10px 30px;
+    padding: 10px 0px 60px;
 }
 .homeBanner {
     /* width: 100%; */
@@ -13,5 +13,15 @@
 .productCardContainer {
     display: flex;
     justify-content: center;
+    padding: 20px 0;
+}
+.mainCategory {
+    text-align: center;
+    position: sticky;
+    background-color: rgba(0, 0, 0, 0.8);
+    color: white;
+    height: auto;
+}
+.categoryItem {
     padding: 20px 0;
 }

@@ -1,105 +1,71 @@
 import React, { useContext } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { AuthContext } from '../../../contexts/AuthContext';
 import './header.css';
 
 function Header() {
     const { handleSubmitLogout, role } = useContext(AuthContext);
+    const navigate = useNavigate();
+    const location = useLocation();
     return (
-        <div>
-            <nav className="navbar navbar-expand-lg navbar-light bg-light">
-                <div className="container-fluid">
-                    <Link className="navbar-brand" to={'/'}>
-                        <img
-                            src="https://res.cloudinary.com/dbtlgaii3/image/upload/v1648014900/Wow/kisspng-world-of-warcraft-emoticon-facebook-computer-icons-wow-5ac0eafc601834.3491116815225925083936_xwfj1s.png"
-                            alt=""
-                            style={{
-                                width: '40px',
-                                height: '40px',
-                                objectFit: 'cover',
-                            }}
-                        />
-                    </Link>
-                    <button
-                        className="navbar-toggler"
-                        type="button"
-                        data-bs-toggle="collapse"
-                        data-bs-target="#navbarText"
-                        aria-controls="navbarText"
-                        aria-expanded="false"
-                        aria-label="Toggle navigation"
-                    >
-                        <span className="navbar-toggler-icon"></span>
-                    </button>
-                    <div className="collapse navbar-collapse" id="navbarText">
-                        <ul className="navbar-nav me-auto mb-2 mb-lg-0">
-                            <li className="nav-item">
-                                <Link
-                                    className="nav-link active"
-                                    aria-current="page"
-                                    to={'/'}
-                                >
-                                    Home
-                                </Link>
-                            </li>
-                            {role === 'guest' ? (
-                                <>
-                                    <li className="nav-item">
-                                        <Link
-                                            className="nav-link"
-                                            to={'/login'}
-                                        >
-                                            Login
-                                        </Link>
-                                    </li>
-                                    <li className="nav-item">
-                                        <Link
-                                            className="nav-link"
-                                            to={'/register'}
-                                        >
-                                            Register
-                                        </Link>
-                                    </li>
-                                </>
-                            ) : (
-                                <form className="d-flex ms-4">
-                                    <input
-                                        className="form-control me-2"
-                                        type="search"
-                                        placeholder="Search"
-                                        aria-label="Search"
-                                    />
-                                    <button
-                                        className="btn btn-outline-success"
-                                        type="submit"
-                                    >
-                                        Search
-                                    </button>
-                                </form>
-                            )}
-                        </ul>
-                        {role === 'guest' ? (
-                            <></>
-                        ) : (
-                            <>
-                                <button type="button" className="btn">
-                                    Shop
-                                </button>
-                                <button type="button" className="btn">
-                                    Cart
-                                </button>
-                                <button
-                                    type="button"
-                                    className="btn"
-                                    onClick={handleSubmitLogout}
-                                >
-                                    Logout
-                                </button>
-                            </>
-                        )}
-                    </div>
+        <div className="navDefault ">
+            <div className="row">
+                <div className="col-lg-2 col-md-0 col-sm-0 col-xs-0">
+                    {location.pathname === '/login' ? (
+                        <Link className="ps-3" to={'/'}>
+                            <img
+                                src="https://www.apple.com/ac/globalnav/7/en_US/images/be15095f-5a20-57d0-ad14-cf4c638e223a/globalnav_apple_image__b5er5ngrzxqq_large.svg"
+                                alt=""
+                                className="logoPic"
+                            />
+                        </Link>
+                    ) : (
+                        <></>
+                    )}
                 </div>
-            </nav>
+                <div className="col-lg-8 col-md-12 col-sm-12 col-xs-12 d-flex justify-content-around align-items-center navLink">
+                    {location.pathname === '/login' ? (
+                        <></>
+                    ) : (
+                        <>
+                            <Link to={'/'}>
+                                <img
+                                    src="https://www.apple.com/ac/globalnav/7/en_US/images/be15095f-5a20-57d0-ad14-cf4c638e223a/globalnav_apple_image__b5er5ngrzxqq_large.svg"
+                                    alt=""
+                                    className="logoPic"
+                                />
+                            </Link>
+                            <Link to={'/'}>Store</Link>
+                            <Link to={'/mac'}>Mac</Link>
+                            <Link to={'/'}>iPad</Link>
+                            <Link to={'/'}>iPhone</Link>
+                            <Link to={'/'}>Watch</Link>
+                            <Link to={'/'}>Airpods</Link>
+                            <Link to={'/'}>TV & Home</Link>
+                            <Link to={'/'}>Cart</Link>
+                        </>
+                    )}
+                </div>
+                <div className="col-lg-2 col-md-0 col-sm-0 col-xs-0 d-flex justify-content-end align-items-center">
+                    {role === 'guest' ? (
+                        location.pathname !== '/login' && (
+                            <button
+                                className="btn navButton"
+                                onClick={() => navigate('/login')}
+                            >
+                                Login
+                            </button>
+                        )
+                    ) : (
+                        <button
+                            className="btn navButton ms-3 me-4"
+                            onClick={handleSubmitLogout}
+                        >
+                            Logout
+                        </button>
+                    )}
+                </div>
+            </div>
         </div>
     );
 }

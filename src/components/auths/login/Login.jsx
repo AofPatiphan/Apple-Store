@@ -4,7 +4,14 @@ import { Link } from 'react-router-dom';
 import { AuthContext } from '../../../contexts/AuthContext';
 
 function Login() {
-    const { facebookLogin } = useContext(AuthContext);
+    const {
+        facebookLogin,
+        email,
+        setEmail,
+        password,
+        setPassword,
+        handleSubmitLogin,
+    } = useContext(AuthContext);
 
     return (
         <>
@@ -22,7 +29,7 @@ function Login() {
                     <div className="col-lg-4 col-md-2 col-sm-2 col-xs-0"></div>
                     <div className="col-lg-4 col-md-8 col-sm-8 col-xs-12">
                         <div className="">
-                            <form>
+                            <form onSubmit={handleSubmitLogin}>
                                 <div className="mb-3">
                                     <label className="form-label">
                                         Email address
@@ -30,6 +37,10 @@ function Login() {
                                     <input
                                         type="email"
                                         className="form-control"
+                                        value={email}
+                                        onChange={(e) =>
+                                            setEmail(e.target.value)
+                                        }
                                     />
                                 </div>
                                 <div className="mb-3">
@@ -39,6 +50,10 @@ function Login() {
                                     <input
                                         type="password"
                                         className="form-control"
+                                        value={password}
+                                        onChange={(e) =>
+                                            setPassword(e.target.value)
+                                        }
                                     />
                                 </div>
                                 <div className="mb-3 form-check d-flex justify-content-between">

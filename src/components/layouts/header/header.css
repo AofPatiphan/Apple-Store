@@ -1,0 +1,19 @@
+.navDefault {
+    background-color: rgba(0, 0, 0, 0.7);
+    color: white;
+    font-size: 0.8rem;
+}
+.logoPic {
+    width: 40px;
+    height: 40px;
+}
+.navButton {
+    color: white;
+}
+.navButton:hover {
+    color: aquamarine;
+}
+.navLink a {
+    text-decoration: none;
+    color: white;
+}
