@@ -8,12 +8,10 @@
         no-repeat center center;
     background-size: cover;
     text-align: center;
-    font-size: 5rem;
-    color: white;
     position: relative;
 }
 .headline {
-    padding-top: 40px;
+    padding-top: 70px;
     color: black;
     font-size: 56px;
     line-height: 1.07143;
@@ -22,10 +20,30 @@
     font-family: 'SF Pro Display', 'SF Pro Icons', 'Helvetica Neue', 'Helvetica',
         'Arial', sans-serif;
 }
+.headline2 {
+    color: black;
+    font-size: 56px;
+    line-height: 1.07143;
+    font-weight: 600;
+    letter-spacing: -0.005em;
+    font-family: 'SF Pro Display', 'SF Pro Icons', 'Helvetica Neue', 'Helvetica',
+        'Arial', sans-serif;
+}
+.iphonesebanner {
+    width: 100%;
+    height: 736px;
+    text-align: center;
+    position: relative;
+}
 .productCardContainer {
     display: flex;
     justify-content: center;
     padding: 20px 0;
+}
+.sepic {
+    margin-top: 20px;
+    width: 70%;
+    object-fit: cover;
 }
 .mainCategory {
     text-align: center;
@@ -34,6 +52,68 @@
     color: white;
     height: auto;
 }
+
 .categoryItem {
     padding: 20px 0;
+}
+.subhead {
+    font-size: 28px;
+    line-height: 1.10722;
+    font-weight: 400;
+    letter-spacing: 0.004em;
+    font-family: 'SF Pro Display', 'SF Pro Icons', 'Helvetica Neue', 'Helvetica',
+        'Arial', sans-serif;
+    margin-top: 6px;
+}
+.abovehead {
+    padding: 70px 0 0;
+    font-size: 21px;
+    line-height: 1.19048;
+    font-weight: 600;
+    letter-spacing: 0.011em;
+    font-family: 'SF Pro Display', 'SF Pro Icons', 'Helvetica Neue', 'Helvetica',
+        'Arial', sans-serif;
+}
+.ipadbanner {
+    width: 100%;
+    height: 736px;
+    background: url(https://res.cloudinary.com/dbtlgaii3/image/upload/v1648229867/Wow/Screen_Shot_2565-03-26_at_00.21.58_j6vxvi.png)
+        no-repeat center center;
+    background-size: cover;
+    text-align: center;
+    position: relative;
+}
+.cta-link {
+    font-size: 21px;
+    display: inline-block;
+    line-height: 1.381;
+    font-weight: 400;
+    letter-spacing: 0.011em;
+    font-family: 'SF Pro Display', 'SF Pro Icons', 'Helvetica Neue', 'Helvetica',
+        'Arial', sans-serif;
+    margin-top: 0.65em;
+}
+.cta-link a {
+    text-decoration: none;
+}
+.cta-link2 {
+    font-size: 21px;
+    display: inline-block;
+    line-height: 1.381;
+    font-weight: 400;
+    letter-spacing: 0.011em;
+    font-family: 'SF Pro Display', 'SF Pro Icons', 'Helvetica Neue', 'Helvetica',
+        'Arial', sans-serif;
+    position: absolute;
+    top: 300px;
+    left: 15%;
+}
+.cta-link2 a {
+    text-decoration: none;
+}
+
+@media screen and (max-width: 992px) {
+    .sepic {
+        width: 100%;
+    }
 }

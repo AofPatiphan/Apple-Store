@@ -1,0 +1,13 @@
+.storebody {
+    padding: 50px 0 0 0;
+}
+.categorylist {
+    list-style: none;
+}
+.categorylist li {
+    padding-top: 10px;
+}
+.categorylist li a {
+    text-decoration: none;
+    color: black;
+}

@@ -13,7 +13,7 @@ function Header() {
     return (
         <>
             <div className="navDefault d-none d-lg-block">
-                <div className="row">
+                <div className="row" style={{ marginRight: 0 }}>
                     <div className="col-lg-2 col-md-0 col-sm-0 col-xs-0 pt-2 pb-2">
                         {location.pathname === '/login' ? (
                             <Link className="ps-3" to={'/'}>
@@ -62,7 +62,7 @@ function Header() {
                             )
                         ) : (
                             <button
-                                className="btn navButton ms-3 me-4"
+                                className="btn navButton "
                                 onClick={handleSubmitLogout}
                             >
                                 Logout
@@ -149,7 +149,7 @@ function Header() {
                             )
                         ) : (
                             <button
-                                className="btn navButton ms-3 me-4"
+                                className="btn navButton "
                                 onClick={handleSubmitLogout}
                             >
                                 Logout

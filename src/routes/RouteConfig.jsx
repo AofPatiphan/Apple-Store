@@ -4,26 +4,29 @@ import MainLayout from '../components/layouts/mainlayout/MainLayout';
 import Login from '../components/auths/login/Login';
 import Register from '../components/auths/register/Register';
 import Home from '../pages/home/Home';
-import Footer from '../components/layouts/footer/Footer';
 import { AuthContext } from '../contexts/AuthContext';
 import Mac from '../pages/mac/Mac';
+import Store from '../pages/store/Store';
 
 const routes = {
     guest: [
         { path: '/', element: <Home /> },
         { path: '/mac', element: <Mac /> },
         { path: '/login', element: <Login /> },
+        { path: '/store', element: <Store /> },
         { path: '/register', element: <Register /> },
         { path: '*', element: <Navigate to="/" replace={true} /> },
     ],
     user: [
         { path: '/', element: <Home /> },
         { path: '/mac', element: <Mac /> },
+        { path: '/store', element: <Store /> },
         { path: '*', element: <Navigate to="/" replace={true} /> },
     ],
     admin: [
         { path: '/', element: <Home /> },
         { path: '/mac', element: <Mac /> },
+        { path: '/store', element: <Store /> },
         { path: '*', element: <Navigate to="/" replace={true} /> },
     ],
 };
@@ -54,7 +57,6 @@ function RouteConfig() {
                             ))}
                         </Route>
                     </Routes>
-                    <Footer />
                 </>
             ) : role === 'admin' ? (
                 <>
@@ -69,7 +71,6 @@ function RouteConfig() {
                             ))}
                         </Route>
                     </Routes>
-                    <Footer />
                 </>
             ) : (
                 <>
@@ -84,7 +85,6 @@ function RouteConfig() {
                             ))}
                         </Route>
                     </Routes>
-                    <Footer />
                 </>
             )}
         </>
