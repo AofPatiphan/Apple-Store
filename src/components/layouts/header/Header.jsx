@@ -7,9 +7,6 @@ function Header() {
     const { handleSubmitLogout, role } = useContext(AuthContext);
     const navigate = useNavigate();
     const location = useLocation();
-    const showSettings = (event) => {
-        event.preventDefault();
-    };
     return (
         <>
             <div className="navDefault d-none d-lg-block">

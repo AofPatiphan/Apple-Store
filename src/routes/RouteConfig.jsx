@@ -7,6 +7,7 @@ import Home from '../pages/home/Home';
 import { AuthContext } from '../contexts/AuthContext';
 import Mac from '../pages/mac/Mac';
 import Store from '../pages/store/Store';
+import ProductDetail from '../pages/productpage/ProductDetail';
 
 const routes = {
     guest: [
@@ -21,12 +22,14 @@ const routes = {
         { path: '/', element: <Home /> },
         { path: '/mac', element: <Mac /> },
         { path: '/store', element: <Store /> },
+        { path: '/store/:productname', element: <ProductDetail /> },
         { path: '*', element: <Navigate to="/" replace={true} /> },
     ],
     admin: [
         { path: '/', element: <Home /> },
         { path: '/mac', element: <Mac /> },
         { path: '/store', element: <Store /> },
+        { path: '/store/:productname', element: <ProductDetail /> },
         { path: '*', element: <Navigate to="/" replace={true} /> },
     ],
 };

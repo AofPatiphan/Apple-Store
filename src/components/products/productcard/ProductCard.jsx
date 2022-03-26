@@ -1,9 +1,13 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import './productcard.css';
 
 function ProductCard() {
     return (
-        <div className="col-lg-4 col-md-12 col-sm-12 col-xs-12 productCard">
+        <Link
+            className="col-lg-4 col-md-12 col-sm-12 col-xs-12 productCard"
+            to={'/store/mac'}
+        >
             <img
                 className="productPicture"
                 src="https://res.cloudinary.com/dbtlgaii3/image/upload/v1648234011/Wow/mba_cgn1an.png"
@@ -19,7 +23,7 @@ function ProductCard() {
                 </p>
             </div>
             <div className="productPrice">฿ 32,900</div>
-        </div>
+        </Link>
     );
 }
 
