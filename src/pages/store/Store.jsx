@@ -1,9 +1,24 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import './store.css';
 import ProductCard from '../../components/products/productcard/ProductCard';
+import axios from '../../config/axios';
 
 function Store() {
+    const [allProduct, setAllProduct] = useState([]);
+    useEffect(() => {
+        fetchProducts();
+    }, []);
+
+    const fetchProducts = async () => {
+        try {
+            const res = await axios.get('/products');
+            setAllProduct(res.data.products);
+        } catch (err) {
+            console.log(err.message);
+        }
+    };
+
     return (
         <div className="storebody">
             <div className="container">
@@ -33,14 +48,9 @@ function Store() {
                     </div>
                     <div className="col-lg-10 col-md-10 col-sm-10 col-xs-10">
                         <div className="row ">
-                            <ProductCard />
-                            <ProductCard />
-                            <ProductCard />
-                            <ProductCard />
-                            <ProductCard />
-                            <ProductCard />
-                            <ProductCard />
-                            <ProductCard />
+                            {allProduct.map((item) => (
+                                <ProductCard productData={item} key={item.id} />
+                            ))}
                         </div>
                     </div>
                 </div>

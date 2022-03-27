@@ -10,6 +10,8 @@
 }
 .productPicture {
     width: 100%;
+    height: 300px;
+    object-fit: contain;
 }
 .productName {
     font-weight: 500;

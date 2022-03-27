@@ -8,6 +8,7 @@ import { AuthContext } from '../contexts/AuthContext';
 import Mac from '../pages/mac/Mac';
 import Store from '../pages/store/Store';
 import ProductDetail from '../pages/productpage/ProductDetail';
+import Cart from '../pages/cart/Cart';
 
 const routes = {
     guest: [
@@ -22,14 +23,15 @@ const routes = {
         { path: '/', element: <Home /> },
         { path: '/mac', element: <Mac /> },
         { path: '/store', element: <Store /> },
-        { path: '/store/:productname', element: <ProductDetail /> },
+        { path: '/store/:productId', element: <ProductDetail /> },
+        { path: '/cart', element: <Cart /> },
         { path: '*', element: <Navigate to="/" replace={true} /> },
     ],
     admin: [
         { path: '/', element: <Home /> },
         { path: '/mac', element: <Mac /> },
         { path: '/store', element: <Store /> },
-        { path: '/store/:productname', element: <ProductDetail /> },
+        { path: '/store/:productId', element: <ProductDetail /> },
         { path: '*', element: <Navigate to="/" replace={true} /> },
     ],
 };

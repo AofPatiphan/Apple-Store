@@ -69,8 +69,6 @@ function AuthContextProvider(props) {
                 confirmPassword,
             });
 
-            console.log(res.data.myUser);
-
             navigate('/login');
             setFirstName('');
             setLastName('');

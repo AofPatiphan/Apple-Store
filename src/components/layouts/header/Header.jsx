@@ -48,6 +48,13 @@ function Header() {
                         )}
                     </div>
                     <div className="col-lg-2 col-md-0 col-sm-0 col-xs-0 d-flex justify-content-end align-items-center">
+                        {role === 'admin' ? (
+                            <button className="btn" style={{ color: 'white' }}>
+                                Add Product
+                            </button>
+                        ) : (
+                            <></>
+                        )}
                         {role === 'guest' ? (
                             location.pathname !== '/login' && (
                                 <button
@@ -135,6 +142,13 @@ function Header() {
                                 </Link>
                             </li>
                         </ul>
+                        {role === 'admin' ? (
+                            <button className="btn" style={{ color: 'white' }}>
+                                Add Product
+                            </button>
+                        ) : (
+                            <></>
+                        )}
                         {role === 'guest' ? (
                             location.pathname !== '/login' && (
                                 <button

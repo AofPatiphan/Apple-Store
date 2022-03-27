@@ -1,19 +1,21 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { Link } from 'react-router-dom';
+import { AuthContext } from '../../../contexts/AuthContext';
 import './productcard.css';
 
-function ProductCard() {
+function ProductCard({ productData }) {
+    const { role } = useContext(AuthContext);
     return (
         <Link
             className="col-lg-4 col-md-12 col-sm-12 col-xs-12 productCard"
-            to={'/store/mac'}
+            to={`${role === 'guest' ? '/login' : `/store/${productData.id}`}`}
         >
             <img
                 className="productPicture"
-                src="https://res.cloudinary.com/dbtlgaii3/image/upload/v1648234011/Wow/mba_cgn1an.png"
+                src={`${productData.ProductImages[0].image}`}
                 alt=""
             />
-            <div className="productName">MacBook Air M1 128Gb</div>
+            <div className="productName">{productData.modelName}</div>
             <div className="productDetail">
                 <p>
                     Lorem ipsum dolor sit amet consectetur adipisicing elit.
@@ -22,7 +24,7 @@ function ProductCard() {
                     similique? Eos quae sint voluptatem placeat?
                 </p>
             </div>
-            <div className="productPrice">฿ 32,900</div>
+            <div className="productPrice">฿ {productData.price}</div>
         </Link>
     );
 }
