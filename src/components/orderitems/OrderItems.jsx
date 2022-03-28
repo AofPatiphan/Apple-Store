@@ -1,8 +1,7 @@
-import React, { useState } from 'react';
+import React from 'react';
 import './orderitems.css';
 
-function OrderItems() {
-    const [titleAmount, setTitltAmount] = useState(1);
+function OrderItems({ titleAmount, setTitltAmount, cart }) {
     return (
         <div className="row orderitemcontainer">
             <div className="col-3">
@@ -17,7 +16,7 @@ function OrderItems() {
                     <div className="row">
                         <div className="col-4">
                             <h2 className="cartitemtitlename">
-                                iPhone 13 Pro ความจุ 128GB สีเขียวอัลไพน์
+                                {cart?.Product?.modelName}
                             </h2>
                         </div>
                         <div className="col-4">
@@ -50,7 +49,9 @@ function OrderItems() {
                         </div>
                         <div className="col-4 d-flex justify-content-end">
                             <div className="cartitemtitlesummary">
-                                <div>฿38,900</div>
+                                <div>
+                                    ฿{(cart.price * titleAmount).toFixed(2)}
+                                </div>
                                 <div
                                     style={{
                                         fontSize: '17px',

@@ -36,8 +36,18 @@ function ProductDetail() {
         }
     };
 
-    const handleClickAddToCart = () => {
-        navigate('/cart');
+    const handleClickAddToCart = async () => {
+        try {
+            const amount = 1;
+            const res = await axios.post(`/carts/${productId}`, {
+                amount,
+                price: sumPrice,
+            });
+            console.log(res.data.newCart);
+            navigate(`/cart/${res.data.newCart.id}`);
+        } catch (err) {
+            console.log(err.message);
+        }
     };
 
     if (!productDetail.ProductImages) {
