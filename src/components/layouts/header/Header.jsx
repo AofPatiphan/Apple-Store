@@ -43,7 +43,7 @@ function Header() {
                                 <Link to={'/watch'}>Watch</Link>
                                 <Link to={'/airpods'}>Airpods</Link>
                                 <Link to={'/tv'}>TV & Home</Link>
-                                <Link to={'/cart'}>Cart</Link>
+                                <Link to={'/cart'}>Order</Link>
                             </>
                         )}
                     </div>

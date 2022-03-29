@@ -1,12 +1,23 @@
 import React from 'react';
 import './orderitems.css';
+import { deleteCartItems } from '../../apis/cart';
+import { useNavigate } from 'react-router-dom';
 
 function OrderItems({ titleAmount, setTitltAmount, cart }) {
+    const navigate = useNavigate();
+    const handleClickDeleteCart = async () => {
+        try {
+            await deleteCartItems(cart.id);
+            navigate('/store');
+        } catch (err) {
+            console.log(err.message);
+        }
+    };
     return (
         <div className="row orderitemcontainer">
-            <div className="col-3">
+            <div className="col-3 d-flex justify-content-center align-items-center">
                 <img
-                    src="https://res.cloudinary.com/dbtlgaii3/image/upload/v1648315119/Wow/IMG_0061_zcimqf.png"
+                    src={cart.Product?.ProductImages[0]?.image}
                     alt=""
                     style={{ width: '100%' }}
                 />
@@ -63,6 +74,7 @@ function OrderItems({ titleAmount, setTitltAmount, cart }) {
                                     <button
                                         className="btn"
                                         style={{ padding: '0', color: 'blue' }}
+                                        onClick={handleClickDeleteCart}
                                     >
                                         delete
                                     </button>
