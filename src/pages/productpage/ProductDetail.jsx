@@ -2,7 +2,8 @@ import React, { useEffect, useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import SelectModel from '../../components/selectmodel/SelectModel';
 import './productdetail.css';
-import axios from '../../config/axios';
+import { getProductById } from '../../apis/product';
+import { createCart } from '../../apis/cart';
 
 function ProductDetail() {
     const [productDetail, setProductDetail] = useState({});
@@ -28,7 +29,7 @@ function ProductDetail() {
 
     const fetchProductById = async () => {
         try {
-            const res = await axios.get(`/products/${productId}`);
+            const res = await getProductById(productId);
             setProductDetail(res.data.product);
             setSumPrice(res.data.product.price);
         } catch (error) {
@@ -39,11 +40,7 @@ function ProductDetail() {
     const handleClickAddToCart = async () => {
         try {
             const amount = 1;
-            const res = await axios.post(`/carts/${productId}`, {
-                amount,
-                price: sumPrice,
-            });
-            console.log(res.data.newCart);
+            const res = await createCart(productId, amount, sumPrice);
             navigate(`/cart/${res.data.newCart.id}`);
         } catch (err) {
             console.log(err.message);

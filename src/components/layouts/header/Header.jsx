@@ -43,7 +43,8 @@ function Header() {
                                 <Link to={'/watch'}>Watch</Link>
                                 <Link to={'/airpods'}>Airpods</Link>
                                 <Link to={'/tv'}>TV & Home</Link>
-                                <Link to={'/cart'}>Order</Link>
+                                <Link to={'/order'}>Order</Link>
+                                <Link to={'/cart'}>Cart</Link>
                             </>
                         )}
                     </div>
@@ -134,6 +135,11 @@ function Header() {
                             <li className="nav-item">
                                 <Link to={'/tv'} className="nav-link">
                                     TV & Home
+                                </Link>
+                            </li>
+                            <li className="nav-item">
+                                <Link to={'/order'} className="nav-link">
+                                    Order
                                 </Link>
                             </li>
                             <li className="nav-item">

@@ -9,6 +9,7 @@ import Mac from '../pages/mac/Mac';
 import Store from '../pages/store/Store';
 import ProductDetail from '../pages/productpage/ProductDetail';
 import Cart from '../pages/cart/Cart';
+import Order from '../pages/order/Order';
 
 const routes = {
     guest: [
@@ -17,7 +18,7 @@ const routes = {
         { path: '/login', element: <Login /> },
         { path: '/store', element: <Store /> },
         { path: '/register', element: <Register /> },
-        { path: '*', element: <Navigate to="/" replace={true} /> },
+        { path: '*', element: <Navigate to="/login" replace={true} /> },
     ],
     user: [
         { path: '/', element: <Home /> },
@@ -25,6 +26,7 @@ const routes = {
         { path: '/store', element: <Store /> },
         { path: '/store/:productId', element: <ProductDetail /> },
         { path: '/cart/:id', element: <Cart /> },
+        { path: '/order', element: <Order /> },
         { path: '*', element: <Navigate to="/" replace={true} /> },
     ],
     admin: [

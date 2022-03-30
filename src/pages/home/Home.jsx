@@ -11,7 +11,7 @@ function Home() {
                     <div className="subhead">Oh.So.Pro.</div>
                     <div className="cta-link">
                         <Link to={'/'}>{'Learn more >'}</Link>
-                        <Link to={'/'} style={{ marginLeft: '35px' }}>
+                        <Link to={'/store/1'} style={{ marginLeft: '35px' }}>
                             {'Buy >'}
                         </Link>
                     </div>

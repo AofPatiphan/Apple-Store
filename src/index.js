@@ -8,12 +8,15 @@ import App from './App';
 import { BrowserRouter } from 'react-router-dom';
 import reportWebVitals from './reportWebVitals';
 import AuthContextProvider from './contexts/AuthContext';
+import ErrContextProvider from './contexts/ErrContext';
 
 ReactDOM.render(
     <BrowserRouter>
-        <AuthContextProvider>
-            <App />
-        </AuthContextProvider>
+        <ErrContextProvider>
+            <AuthContextProvider>
+                <App />
+            </AuthContextProvider>
+        </ErrContextProvider>
     </BrowserRouter>,
     document.getElementById('root')
 );

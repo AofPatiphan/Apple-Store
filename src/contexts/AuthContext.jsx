@@ -1,9 +1,9 @@
-import axios from '../config/axios';
 import { createContext, useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import jwtDecode from 'jwt-decode';
 import * as localStorageService from '../services/localStorage';
 import { signInWithPopup, FacebookAuthProvider, signOut } from 'firebase/auth';
+import { createUser, defaultLogin, loginFacebook } from '../apis/auth';
 import { authenication } from '../config/firebase-config';
 const AuthContext = createContext();
 
@@ -31,7 +31,7 @@ function AuthContextProvider(props) {
             e.preventDefault();
             const provider = new FacebookAuthProvider();
             const response = await signInWithPopup(authenication, provider);
-            const res = await axios.post('/auth/loginfb', { response });
+            const res = await loginFacebook(response);
             login(res.data.token);
         } catch (err) {
             console.log(err.message);
@@ -41,7 +41,7 @@ function AuthContextProvider(props) {
     const handleSubmitLogin = async (e) => {
         try {
             e.preventDefault();
-            const res = await axios.post('/auth/login', { email, password });
+            const res = await defaultLogin(email, password);
             login(res.data.token);
         } catch (err) {
             console.log(err);
@@ -52,6 +52,8 @@ function AuthContextProvider(props) {
             await localStorageService.setToken(token);
             setUser(jwtDecode(token));
             setRole(jwtDecode(token).role);
+            setEmail('');
+            setPassword('');
             navigate('/');
         } catch (err) {
             console.log(err);
@@ -61,13 +63,13 @@ function AuthContextProvider(props) {
     const handleSubmitRegister = async (e) => {
         e.preventDefault();
         try {
-            const res = await axios.post('/auth/register', {
+            const res = await createUser(
                 firstName,
                 lastName,
                 email,
                 password,
-                confirmPassword,
-            });
+                confirmPassword
+            );
 
             navigate('/login');
             setFirstName('');

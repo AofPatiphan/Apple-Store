@@ -2,22 +2,22 @@ import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import './store.css';
 import ProductCard from '../../components/products/productcard/ProductCard';
-import axios from '../../config/axios';
+import { getProduct } from '../../apis/store';
 
 function Store() {
     const [allProduct, setAllProduct] = useState([]);
-    useEffect(() => {
-        fetchProducts();
-    }, []);
 
     const fetchProducts = async () => {
         try {
-            const res = await axios.get('/products');
+            const res = await getProduct();
             setAllProduct(res.data.products);
         } catch (err) {
             console.log(err.message);
         }
     };
+    useEffect(() => {
+        fetchProducts();
+    }, []);
 
     return (
         <div className="storebody">
