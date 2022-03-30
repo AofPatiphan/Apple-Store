@@ -6,11 +6,14 @@ import { getProduct } from '../../apis/store';
 
 function Store() {
     const [allProduct, setAllProduct] = useState([]);
+    const [loading, setLoading] = useState(false);
 
     const fetchProducts = async () => {
+        setLoading(true);
         try {
             const res = await getProduct();
             setAllProduct(res.data.products);
+            setLoading(false);
         } catch (err) {
             console.log(err.message);
         }
@@ -18,6 +21,10 @@ function Store() {
     useEffect(() => {
         fetchProducts();
     }, []);
+
+    if (loading) {
+        return <div>loading...</div>;
+    }
 
     return (
         <div className="storebody">

@@ -1,0 +1,17 @@
+.orderDetail {
+    border-radius: 15px;
+    padding: 30px;
+    margin: 20px 0 40px;
+    box-shadow: -1px 0px 38px 0px rgba(0, 0, 0, 0.3);
+}
+.orderStatus {
+    border-bottom: 1px solid lightgray;
+    padding-bottom: 20px;
+}
+.orderItem {
+    border-bottom: 1px solid lightgray;
+    padding: 20px 0;
+}
+.orderSummary {
+    margin-top: 20px;
+}

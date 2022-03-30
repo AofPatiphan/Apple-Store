@@ -1,18 +1,39 @@
-import React from 'react';
-import './orderitems.css';
-import { deleteCartItems } from '../../apis/cart';
-import { useNavigate } from 'react-router-dom';
+import React, { useEffect, useState } from 'react';
+import { updateCart } from '../../apis/cart';
+import './cartitems.css';
 
-function OrderItems({ titleAmount, setTitltAmount, cart }) {
-    const navigate = useNavigate();
-    const handleClickDeleteCart = async () => {
-        try {
-            await deleteCartItems(cart.id);
-            navigate('/store');
-        } catch (err) {
-            console.log(err.message);
-        }
+function OrderItems({ cart, handleClickDeleteCart, setTempSummary }) {
+    const [isDelete, setIsDelete] = useState(false);
+    const [titleAmount, setTitltAmount] = useState(+cart.amount);
+    const handleClickDecreaseAmount = async () => {
+        setTitltAmount((prev) => (prev > 1 ? prev - 1 : prev));
     };
+    const handleClickIncreaseAmount = async () => {
+        setTitltAmount((prev) => prev + 1);
+    };
+
+    const updateCartAsync = async () => {
+        await updateCart(cart.id, titleAmount);
+        setTempSummary((prev) => ({
+            ...prev,
+            [cart.id]: cart.price * titleAmount,
+        }));
+    };
+
+    useEffect(() => {
+        if (isDelete) {
+            setTempSummary((prev) => ({
+                ...prev,
+                [cart.id]: 0,
+            }));
+        } else if (!isDelete) {
+        }
+    }, [isDelete]);
+
+    useEffect(() => {
+        updateCartAsync();
+    }, [titleAmount]);
+
     return (
         <div className="row orderitemcontainer">
             <div className="col-3 d-flex justify-content-center align-items-center">
@@ -37,11 +58,7 @@ function OrderItems({ titleAmount, setTitltAmount, cart }) {
                             >
                                 <button
                                     className="btn btntitleamount"
-                                    onClick={() =>
-                                        setTitltAmount((prev) =>
-                                            prev > 1 ? prev - 1 : prev
-                                        )
-                                    }
+                                    onClick={handleClickDecreaseAmount}
                                 >
                                     -
                                 </button>
@@ -50,9 +67,7 @@ function OrderItems({ titleAmount, setTitltAmount, cart }) {
                                 </button>
                                 <button
                                     className="btn btntitleamount"
-                                    onClick={() =>
-                                        setTitltAmount((prev) => prev + 1)
-                                    }
+                                    onClick={handleClickIncreaseAmount}
                                 >
                                     +
                                 </button>
@@ -72,9 +87,13 @@ function OrderItems({ titleAmount, setTitltAmount, cart }) {
                                     }}
                                 >
                                     <button
+                                        type="button"
                                         className="btn"
                                         style={{ padding: '0', color: 'blue' }}
-                                        onClick={handleClickDeleteCart}
+                                        onClick={() => {
+                                            handleClickDeleteCart(cart.id);
+                                            setIsDelete(true);
+                                        }}
                                     >
                                         delete
                                     </button>

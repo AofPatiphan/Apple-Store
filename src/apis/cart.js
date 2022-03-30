@@ -1,11 +1,20 @@
 import axios from '../config/axios';
 
-export const getCartItem = async (id) => {
-    return await axios.get(`/carts/${id}`);
+export const getCartItem = async () => {
+    return await axios.get(`/carts`);
+};
+
+export const deleteAllCart = async () => {
+    return await axios.delete(`/carts`);
 };
 
 export const deleteCartItems = async (id) => {
-    return await axios.delete('/carts');
+    try {
+        const res = await axios.delete(`/carts/${id}`);
+        return res;
+    } catch (err) {
+        console.log(err);
+    }
 };
 
 export const createCart = async (id, amount, price) => {
@@ -22,4 +31,8 @@ export const createCharge = async (email, description, card, amount) => {
         card,
         amount,
     });
+};
+
+export const updateCart = async (id, amount) => {
+    return await axios.patch(`/carts/${id}`, { amount });
 };

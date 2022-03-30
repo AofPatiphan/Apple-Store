@@ -1,8 +1,13 @@
 import React, { useContext, useEffect, useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
-import { createCharge, deleteCartItems, getCartItem } from '../../apis/cart';
+import {
+    createCharge,
+    deleteAllCart,
+    deleteCartItems,
+    getCartItem,
+} from '../../apis/cart';
 import { createOrder, createOrderItem } from '../../apis/order';
-import OrderItems from '../../components/orderitems/OrderItems';
+import CartItems from '../../components/cartitems/CartItems';
 import { ErrContext } from '../../contexts/ErrContext';
 import './cart.css';
 
@@ -10,14 +15,23 @@ let OmiseCard;
 
 function Cart() {
     const navigate = useNavigate();
-    const { id } = useParams();
     const { setSuccess, setError } = useContext(ErrContext);
-    const [cart, setCart] = useState({});
+    const [cart, setCart] = useState([]);
     const [summaryCart, setSummaryCart] = useState(0);
     const [titleAmount, setTitltAmount] = useState(1);
+    const [tempSummary, setTempSummary] = useState({});
+
+    useEffect(() => {
+        setSummaryCart(
+            Object.values(tempSummary).reduce(
+                (previousValue, currentValue) => previousValue + currentValue,
+                0
+            )
+        );
+    }, [tempSummary]);
 
     const fetchCart = async () => {
-        const res = await getCartItem(id);
+        const res = await getCartItem();
         setCart(res.data.cart);
         setSummaryCart(res.data.cart.price);
     };
@@ -70,16 +84,11 @@ function Cart() {
 
     const successfullyCheckout = async () => {
         setSuccess('Payment Successful');
-        const res = await createOrder('success');
-        await createOrderItem(
-            res.data.newOrder.id,
-            cart.productId,
-            +summaryCart,
-            titleAmount
-        );
+        const res = await createOrder('Payment success');
+        await createOrderItem(res.data.newOrder.id);
         setTimeout(() => {
             setSuccess('');
-            deleteCartItems();
+            deleteAllCart();
             navigate('/order');
         }, 2500);
     };
@@ -95,22 +104,41 @@ function Cart() {
         setSummaryCart((cart.price * titleAmount).toFixed(2));
     }, [titleAmount]);
 
+    const handleClickDeleteCart = async (id) => {
+        try {
+            await deleteCartItems(id);
+            const deletedCart = cart.filter((item) => item.id !== id);
+            setCart(deletedCart);
+        } catch (err) {
+            console.log(err.message);
+        }
+    };
+
     return (
         <div className="cartbody">
             <div className="container cart-title">
                 <div className="title-header">
-                    นี่คือรายการที่อยู่ในถุงของคุณ ฿{cart.price}
+                    นี่คือรายการที่อยู่ในถุงของคุณ ฿
+                    {cart.length ? summaryCart : 0}
                 </div>
                 <div className="title-message">
                     รับบริการจัดส่งฟรีและส่งคืนฟรีทุกคำสั่งซื้อ
                 </div>
             </div>
             <div className="container orderitemcontainer1">
-                <OrderItems
+                {cart.map((item) => (
+                    <CartItems
+                        cart={item}
+                        key={item.id}
+                        setTempSummary={setTempSummary}
+                        handleClickDeleteCart={handleClickDeleteCart}
+                    />
+                ))}
+                {/* <CartItems
                     cart={cart}
                     titleAmount={titleAmount}
                     setTitltAmount={setTitltAmount}
-                />
+                /> */}
             </div>
             <div className="container summarycontainer">
                 <div className="row">
@@ -119,7 +147,7 @@ function Cart() {
                         <div className="summaryheader">
                             <div className="d-flex justify-content-between">
                                 <div>ยอดรวม</div>
-                                <div>฿{summaryCart}</div>
+                                <div>฿{cart.length ? summaryCart : 0}</div>
                             </div>
                             <div className="d-flex justify-content-between">
                                 <div>การจัดส่ง</div>
@@ -134,14 +162,22 @@ function Cart() {
                                     style={{ textAlign: 'right' }}
                                 >
                                     <div>
-                                        ฿{(summaryCart * 0.93).toFixed(2)}
+                                        ฿
+                                        {cart.length
+                                            ? (summaryCart * 0.93).toFixed(2)
+                                            : 0}
                                     </div>
                                     <div>
                                         รวม VAT จำนวน ฿
-                                        {(summaryCart * 0.07).toFixed(2)}
+                                        {cart.length
+                                            ? (summaryCart * 0.07).toFixed(2)
+                                            : 0}
                                     </div>
                                     <div>
-                                        Total ฿{(+summaryCart).toFixed(2)}
+                                        Total ฿
+                                        {cart.length
+                                            ? (+summaryCart).toFixed(2)
+                                            : 0}
                                     </div>
                                     <div style={{ paddingTop: '20px' }}>
                                         <div>
@@ -150,14 +186,26 @@ function Cart() {
                                                     e.preventDefault()
                                                 }
                                             >
-                                                <button
-                                                    id="credit-card"
-                                                    type="button"
-                                                    onClick={handleClick}
-                                                    className="btn btn-primary"
-                                                >
-                                                    Proceed to Payment
-                                                </button>
+                                                {cart.length ? (
+                                                    <button
+                                                        id="credit-card"
+                                                        type="button"
+                                                        onClick={handleClick}
+                                                        className="btn btn-primary"
+                                                    >
+                                                        Proceed to Payment
+                                                    </button>
+                                                ) : (
+                                                    <button
+                                                        id="credit-card"
+                                                        type="button"
+                                                        onClick={handleClick}
+                                                        className="btn btn-primary"
+                                                        disabled
+                                                    >
+                                                        Proceed to Payment
+                                                    </button>
+                                                )}
                                             </form>
                                         </div>
                                     </div>

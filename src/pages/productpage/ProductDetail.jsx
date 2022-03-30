@@ -41,7 +41,7 @@ function ProductDetail() {
         try {
             const amount = 1;
             const res = await createCart(productId, amount, sumPrice);
-            navigate(`/cart/${res.data.newCart.id}`);
+            navigate(`/cart`);
         } catch (err) {
             console.log(err.message);
         }

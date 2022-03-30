@@ -25,7 +25,7 @@ const routes = {
         { path: '/mac', element: <Mac /> },
         { path: '/store', element: <Store /> },
         { path: '/store/:productId', element: <ProductDetail /> },
-        { path: '/cart/:id', element: <Cart /> },
+        { path: '/cart', element: <Cart /> },
         { path: '/order', element: <Order /> },
         { path: '*', element: <Navigate to="/" replace={true} /> },
     ],

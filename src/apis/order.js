@@ -7,8 +7,8 @@ export const createOrder = async (status) => {
     return await axios.post('/orders', { status });
 };
 
-export const createOrderItem = async (orderId, productId, price, amount) => {
-    return await axios.post(`/orders/${orderId}`, { productId, price, amount });
+export const createOrderItem = async (orderId) => {
+    return await axios.post(`/orders/${orderId}`);
 };
 
 export const deleteOrder = async (orderId) => {
