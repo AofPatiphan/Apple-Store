@@ -1,6 +1,6 @@
-import axios from '../../config/axios';
 import React, { useState } from 'react';
 import './profiledetail.css';
+import { updateUserData } from '../../apis/user';
 
 function ProfileDetail({ userData, setUserData }) {
     const [isEdit, setIsEdit] = useState(false);
@@ -9,7 +9,7 @@ function ProfileDetail({ userData, setUserData }) {
 
     const handleClickSubmitChange = async () => {
         try {
-            const res = await axios.patch('/users', { address, phoneNumber });
+            const res = await updateUserData(address, phoneNumber);
             setUserData(res.data.user);
             setIsEdit(false);
         } catch (err) {

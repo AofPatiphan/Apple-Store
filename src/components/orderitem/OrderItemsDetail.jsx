@@ -1,7 +1,6 @@
 import React from 'react';
 
 function OrderItemsDetail({ item }) {
-    // console.log(item);
     return (
         <div className="row orderItem">
             <div className="col-8 d-flex" style={{ gap: '30px' }}>

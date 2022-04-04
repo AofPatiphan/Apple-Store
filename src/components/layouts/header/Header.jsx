@@ -1,9 +1,9 @@
 import React, { useContext, useState, useEffect } from 'react';
-import axios from '../../../config/axios';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { AuthContext } from '../../../contexts/AuthContext';
 import ProfileDetail from '../../profiledetail/ProfileDetail';
 import './header.css';
+import { getUserData } from '../../../apis/user';
 
 function Header() {
     const { handleSubmitLogout, role, user } = useContext(AuthContext);
@@ -14,7 +14,7 @@ function Header() {
 
     const fetchUserData = async () => {
         setIsLoading(true);
-        const res = await axios.get('/users');
+        const res = await getUserData();
         await setUserData(res.data.user);
         setIsLoading(false);
     };

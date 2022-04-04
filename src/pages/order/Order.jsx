@@ -9,7 +9,6 @@ function Order() {
         try {
             const res = await getOrder();
             setOrder(res.data.orders);
-            console.log(res.data.orders);
         } catch (err) {
             console.log(err.message);
         }
