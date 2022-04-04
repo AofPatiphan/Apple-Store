@@ -71,8 +71,12 @@ function Header() {
                     </div>
                     <div className="col-lg-2 col-md-0 col-sm-0 col-xs-0 d-flex justify-content-end align-items-center">
                         {role === 'admin' ? (
-                            <button className="btn" style={{ color: 'white' }}>
-                                Add Product
+                            <button
+                                className="btn"
+                                style={{ color: 'white' }}
+                                onClick={() => navigate('/admin')}
+                            >
+                                Admin
                             </button>
                         ) : role === 'user' ? (
                             <button
@@ -180,8 +184,12 @@ function Header() {
                             </li>
                         </ul>
                         {role === 'admin' ? (
-                            <button className="btn" style={{ color: 'white' }}>
-                                Add Product
+                            <button
+                                className="btn"
+                                style={{ color: 'white' }}
+                                onClick={() => navigate('/admin')}
+                            >
+                                Admin
                             </button>
                         ) : role === 'user' ? (
                             <button

@@ -23,7 +23,7 @@ function App() {
         <div className="position-relative">
             <div className="toast-container position-absolute p-3 me-5 start-50 bottom-0 translate-middle-x">
                 <div
-                    className={`toast align-items-center text-white ${
+                    className={`toast align-items-center bottom-0 text-white ${
                         error && `bg-danger`
                     } ${success && `bg-success`} border-0`}
                     ref={toastEl}

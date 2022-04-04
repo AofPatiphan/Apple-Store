@@ -10,6 +10,7 @@ import Store from '../pages/store/Store';
 import ProductDetail from '../pages/productpage/ProductDetail';
 import Cart from '../pages/cart/Cart';
 import Order from '../pages/order/Order';
+import Admin from '../pages/admin/Admin';
 
 const routes = {
     guest: [
@@ -33,6 +34,7 @@ const routes = {
         { path: '/', element: <Home /> },
         { path: '/mac', element: <Mac /> },
         { path: '/store', element: <Store /> },
+        { path: '/admin', element: <Admin /> },
         { path: '/store/:productId', element: <ProductDetail /> },
         { path: '*', element: <Navigate to="/" replace={true} /> },
     ],
