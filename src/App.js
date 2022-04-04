@@ -17,6 +17,8 @@ function App() {
             toast.show();
         }
     }, [error, success]);
+
+    console.log(error);
     return (
         <div className="position-relative">
             <div className="toast-container position-absolute p-3 me-5 start-50 bottom-0 translate-middle-x">

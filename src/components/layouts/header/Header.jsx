@@ -13,10 +13,12 @@ function Header() {
     const location = useLocation();
 
     const fetchUserData = async () => {
-        setIsLoading(true);
-        const res = await getUserData();
-        await setUserData(res.data.user);
-        setIsLoading(false);
+        if (role === 'user' || role === 'admin') {
+            setIsLoading(true);
+            const res = await getUserData();
+            await setUserData(res.data.user);
+            setIsLoading(false);
+        }
     };
     useEffect(() => {
         fetchUserData();

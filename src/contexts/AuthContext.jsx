@@ -1,13 +1,15 @@
-import { createContext, useState, useEffect } from 'react';
+import { createContext, useState, useEffect, useContext } from 'react';
 import { useNavigate } from 'react-router-dom';
 import jwtDecode from 'jwt-decode';
 import * as localStorageService from '../services/localStorage';
 import { signInWithPopup, FacebookAuthProvider, signOut } from 'firebase/auth';
 import { createUser, defaultLogin, loginFacebook } from '../apis/auth';
 import { authenication } from '../config/firebase-config';
+import { ErrContext } from './ErrContext';
 const AuthContext = createContext();
 
 function AuthContextProvider(props) {
+    const { setError } = useContext(ErrContext);
     const [user, setUser] = useState(null);
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
@@ -44,7 +46,9 @@ function AuthContextProvider(props) {
             const res = await defaultLogin(email, password);
             login(res.data.token);
         } catch (err) {
-            console.log(err);
+            setError(err.response.data.message);
+            console.log(err.response.data.message);
+            setTimeout(() => setError(''), 3000);
         }
     };
     const login = async (token) => {
@@ -78,7 +82,9 @@ function AuthContextProvider(props) {
             setPassword('');
             setConfirmPassword('');
         } catch (err) {
-            console.log(err);
+            setError(err.response.data.message);
+            console.log(err.response.data.message);
+            setTimeout(() => setError(''), 3000);
         }
     };
 

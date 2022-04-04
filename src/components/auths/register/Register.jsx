@@ -1,5 +1,6 @@
 import React, { useContext } from 'react';
 import { AuthContext } from '../../../contexts/AuthContext';
+import { ErrContext } from '../../../contexts/ErrContext';
 import './register.css';
 
 function Register() {
@@ -16,6 +17,7 @@ function Register() {
         setPassword,
         handleSubmitRegister,
     } = useContext(AuthContext);
+    const { error } = useContext(ErrContext);
     return (
         <>
             <div className="container" style={{ paddingTop: '50px' }}>
@@ -39,12 +41,20 @@ function Register() {
                                     </label>
                                     <input
                                         type="text"
-                                        className="form-control"
+                                        className={`form-control  ${
+                                            error && !firstName
+                                                ? 'is-invalid'
+                                                : ''
+                                        }`}
                                         value={firstName}
+                                        placeholder="First name"
                                         onChange={(e) =>
                                             setFirstName(e.target.value)
                                         }
                                     />
+                                    <div className="invalid-feedback">
+                                        Please fill your first name.
+                                    </div>
                                 </div>
                                 <div className="mb-3">
                                     <label className="form-label">
@@ -52,12 +62,20 @@ function Register() {
                                     </label>
                                     <input
                                         type="text"
-                                        className="form-control"
+                                        className={`form-control  ${
+                                            error && !lastName
+                                                ? 'is-invalid'
+                                                : ''
+                                        }`}
                                         value={lastName}
+                                        placeholder="Last name"
                                         onChange={(e) =>
                                             setLastName(e.target.value)
                                         }
                                     />
+                                    <div className="invalid-feedback">
+                                        Please fill your last name.
+                                    </div>
                                 </div>
                                 <div className="mb-3">
                                     <label className="form-label">
@@ -65,12 +83,18 @@ function Register() {
                                     </label>
                                     <input
                                         type="email"
-                                        className="form-control"
+                                        className={`form-control  ${
+                                            error && !email ? 'is-invalid' : ''
+                                        }`}
                                         value={email}
+                                        placeholder="E-mail"
                                         onChange={(e) =>
                                             setEmail(e.target.value)
                                         }
                                     />
+                                    <div className="invalid-feedback">
+                                        Please fill your email.
+                                    </div>
                                 </div>
                                 <div className="mb-3">
                                     <label className="form-label">
@@ -78,12 +102,20 @@ function Register() {
                                     </label>
                                     <input
                                         type="password"
-                                        className="form-control"
+                                        className={`form-control  ${
+                                            error && !password
+                                                ? 'is-invalid'
+                                                : ''
+                                        }`}
                                         value={password}
+                                        placeholder="Password"
                                         onChange={(e) =>
                                             setPassword(e.target.value)
                                         }
                                     />
+                                    <div className="invalid-feedback">
+                                        Please fill your password.
+                                    </div>
                                 </div>
                                 <div className="mb-3">
                                     <label className="form-label">
@@ -91,12 +123,20 @@ function Register() {
                                     </label>
                                     <input
                                         type="password"
-                                        className="form-control"
+                                        className={`form-control  ${
+                                            error && !confirmPassword
+                                                ? 'is-invalid'
+                                                : ''
+                                        }`}
                                         value={confirmPassword}
+                                        placeholder="Confirm password"
                                         onChange={(e) =>
                                             setConfirmPassword(e.target.value)
                                         }
                                     />
+                                    <div className="invalid-feedback">
+                                        Please fill your confirm password.
+                                    </div>
                                 </div>
                                 <button
                                     type="submit"

@@ -2,6 +2,7 @@ import React, { useContext } from 'react';
 import './login.css';
 import { Link } from 'react-router-dom';
 import { AuthContext } from '../../../contexts/AuthContext';
+import { ErrContext } from '../../../contexts/ErrContext';
 
 function Login() {
     const {
@@ -12,6 +13,7 @@ function Login() {
         setPassword,
         handleSubmitLogin,
     } = useContext(AuthContext);
+    const { error } = useContext(ErrContext);
 
     return (
         <>
@@ -36,12 +38,18 @@ function Login() {
                                     </label>
                                     <input
                                         type="email"
-                                        className="form-control"
+                                        className={`form-control  ${
+                                            error && !email ? 'is-invalid' : ''
+                                        }`}
+                                        placeholder="E-mail"
                                         value={email}
                                         onChange={(e) =>
                                             setEmail(e.target.value)
                                         }
                                     />
+                                    <div className="invalid-feedback">
+                                        Please fill your email.
+                                    </div>
                                 </div>
                                 <div className="mb-3">
                                     <label className="form-label">
@@ -49,12 +57,20 @@ function Login() {
                                     </label>
                                     <input
                                         type="password"
-                                        className="form-control"
+                                        className={`form-control  ${
+                                            error && !password
+                                                ? 'is-invalid'
+                                                : ''
+                                        }`}
                                         value={password}
+                                        placeholder="Password"
                                         onChange={(e) =>
                                             setPassword(e.target.value)
                                         }
                                     />
+                                    <div className="invalid-feedback">
+                                        Please fill your email.
+                                    </div>
                                 </div>
                                 <div className="mb-3 form-check d-flex justify-content-between">
                                     <div>
