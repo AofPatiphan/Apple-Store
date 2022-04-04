@@ -1,12 +1,31 @@
-import React, { useContext } from 'react';
+import React, { useContext, useState, useEffect } from 'react';
+import axios from '../../../config/axios';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { AuthContext } from '../../../contexts/AuthContext';
+import ProfileDetail from '../../profiledetail/ProfileDetail';
 import './header.css';
 
 function Header() {
-    const { handleSubmitLogout, role } = useContext(AuthContext);
+    const { handleSubmitLogout, role, user } = useContext(AuthContext);
+    const [userData, setUserData] = useState({});
+    const [isLoading, setIsLoading] = useState(false);
     const navigate = useNavigate();
     const location = useLocation();
+
+    const fetchUserData = async () => {
+        setIsLoading(true);
+        const res = await axios.get('/users');
+        await setUserData(res.data.user);
+        setIsLoading(false);
+    };
+    useEffect(() => {
+        fetchUserData();
+    }, []);
+
+    if (isLoading) {
+        return <></>;
+    }
+
     return (
         <>
             <div className="navDefault d-none d-lg-block">
@@ -52,6 +71,16 @@ function Header() {
                         {role === 'admin' ? (
                             <button className="btn" style={{ color: 'white' }}>
                                 Add Product
+                            </button>
+                        ) : role === 'user' ? (
+                            <button
+                                type="button"
+                                className="btn"
+                                style={{ color: 'white' }}
+                                data-bs-toggle="modal"
+                                data-bs-target="#profileDetail"
+                            >
+                                {user.firstName}
                             </button>
                         ) : (
                             <></>
@@ -152,6 +181,16 @@ function Header() {
                             <button className="btn" style={{ color: 'white' }}>
                                 Add Product
                             </button>
+                        ) : role === 'user' ? (
+                            <button
+                                type="button"
+                                className="btn"
+                                style={{ color: 'white' }}
+                                data-bs-toggle="modal"
+                                data-bs-target="#profileDetail"
+                            >
+                                {user.firstName}
+                            </button>
                         ) : (
                             <></>
                         )}
@@ -175,6 +214,8 @@ function Header() {
                     </div>
                 </div>
             </nav>
+
+            <ProfileDetail userData={userData} setUserData={setUserData} />
         </>
     );
 }
